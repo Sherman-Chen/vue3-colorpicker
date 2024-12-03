@@ -30,7 +30,12 @@
             :style="gradientBg"
             @click="handlePotBar"
           ></div>
-          <div class="vc-gradient__stop__container">
+          <div
+            class="vc-gradient__stop__container"
+            @keydown.stop.prevent="handleKeyDown"
+            @keyup.stop.prevent
+            tabindex="0"
+          >
             <div
               class="vc-gradient__stop"
               v-for="(item, index) in colors"
@@ -42,8 +47,6 @@
               :style="{ left: `calc(${item.pst + '%'} - 8px)` }"
               @mousedown="sliderPotDown(index, $event)"
               @click="clickGColorPot(index)"
-              @keydown.stop.prevent="handleKeyDown"
-              tabindex="0"
             >
               <span class="vc-gradient__stop--inner"></span>
             </div>
@@ -359,10 +362,11 @@ export default defineComponent({
         // 增加后默认选中
         state.selectIndex = state.colors.length - 1;
         nextTick(() => {
-          const selectedPot = startGradientRef.value?.[state.selectIndex];
-          if (selectedPot) {
-            selectedPot.focus();
-          }
+          // .vc-gradient__stop__container获得焦点
+          const stopContainer = document.querySelector(
+            ".vc-gradient__stop__container"
+          ) as HTMLElement;
+          stopContainer.focus();
         });
 
         emit("gradientChange", state.colors);
