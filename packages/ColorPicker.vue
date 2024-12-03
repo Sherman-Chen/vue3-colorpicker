@@ -292,6 +292,8 @@ export default defineComponent({
           }
 
           gradientState.type = colorNode.type.split("-")[0];
+          // 更新gradientData
+          emit("update:gradientData", colorNode);
         }
       } catch (e) {
         console.log(`[Parse Color]: ${e}`);

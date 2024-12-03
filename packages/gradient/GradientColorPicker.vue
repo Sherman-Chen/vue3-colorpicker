@@ -42,7 +42,7 @@
               :style="{ left: `calc(${item.pst + '%'} - 8px)` }"
               @mousedown="sliderPotDown(index, $event)"
               @click="clickGColorPot(index)"
-              @keyup.stop.prevent="handleKeyDown"
+              @keydown.stop.prevent="handleKeyDown"
               tabindex="0"
             >
               <span class="vc-gradient__stop--inner"></span>
@@ -102,8 +102,6 @@ import {
   defineComponent,
   inject,
   nextTick,
-  onMounted,
-  onUnmounted,
   PropType,
   reactive,
   ref,

@@ -1,9 +1,9 @@
 var je = Object.defineProperty;
 var Ue = (e, t, o) => t in e ? je(e, t, { enumerable: !0, configurable: !0, writable: !0, value: o }) : e[t] = o;
 var V = (e, t, o) => (Ue(e, typeof t != "symbol" ? t + "" : t, o), o);
-import { defineComponent as O, ref as P, reactive as Y, watch as te, computed as M, openBlock as p, createElementBlock as $, normalizeClass as T, createElementVNode as d, normalizeStyle as I, Fragment as U, renderList as oe, getCurrentInstance as Ze, nextTick as Ee, createCommentVNode as S, toDisplayString as ce, resolveComponent as B, createBlock as L, createVNode as j, onMounted as Je, inject as Te, withDirectives as Ne, vShow as Oe, withModifiers as Qe, createTextVNode as xe, renderSlot as et, provide as tt, withCtx as Ae, resolveDynamicComponent as Re, mergeProps as Le, Teleport as ot } from "vue";
+import { defineComponent as O, ref as w, reactive as Y, watch as te, computed as M, openBlock as p, createElementBlock as $, normalizeClass as T, createElementVNode as d, normalizeStyle as K, Fragment as U, renderList as oe, getCurrentInstance as Ze, nextTick as Ee, createCommentVNode as S, toDisplayString as ce, resolveComponent as B, createBlock as L, createVNode as j, onMounted as Je, inject as Te, withDirectives as Ne, vShow as Oe, withModifiers as Qe, createTextVNode as xe, renderSlot as et, provide as tt, withCtx as Ae, resolveDynamicComponent as Re, mergeProps as Le, Teleport as ot } from "vue";
 import { tryOnMounted as ae, whenever as E, useEyeDropper as nt, useDebounceFn as J, useLocalStorage as ye, useEventListener as Ve, onClickOutside as at } from "@vueuse/core";
-import w from "tinycolor2";
+import P from "tinycolor2";
 import { stringify as rt, parse as lt } from "gradient-parser";
 import { createPopper as st } from "@popperjs/core";
 import v from "vue-types";
@@ -45,7 +45,7 @@ class D {
     });
     V(this, "toHexString", () => this.instance.toHexString());
     V(this, "toRgbString", () => this.instance.toRgbString());
-    this.instance = w(t), this.initRgb(), this.initHsb(), this.initLightness(), this.initAlpha();
+    this.instance = P(t), this.initRgb(), this.initHsb(), this.initLightness(), this.initAlpha();
   }
   toString(t) {
     return this.instance.toString(t);
@@ -54,11 +54,11 @@ class D {
     return this.instance.toHex();
   }
   set hex(t) {
-    this.instance = w(t), this.initHsb(), this.initRgb(), this.initAlpha(), this.initLightness();
+    this.instance = P(t), this.initHsb(), this.initRgb(), this.initAlpha(), this.initLightness();
   }
   // 色调
   set hue(t) {
-    this.saturation === 0 && this.brightness === 0 && (this.saturationValue = 1, this.brightnessValue = 1), this.instance = w({
+    this.saturation === 0 && this.brightness === 0 && (this.saturationValue = 1, this.brightnessValue = 1), this.instance = P({
       h: H(t),
       s: this.saturation,
       v: this.brightness,
@@ -70,7 +70,7 @@ class D {
   }
   // 饱和度
   set saturation(t) {
-    this.instance = w({
+    this.instance = P({
       h: this.hue,
       s: H(t),
       v: this.brightness,
@@ -82,7 +82,7 @@ class D {
   }
   // 明度
   set brightness(t) {
-    this.instance = w({
+    this.instance = P({
       h: this.hue,
       s: this.saturation,
       v: H(t),
@@ -94,7 +94,7 @@ class D {
   }
   // 亮度
   set lightness(t) {
-    this.instance = w({
+    this.instance = P({
       h: this.hue,
       s: this.hslSaturationValue,
       l: H(t),
@@ -107,7 +107,7 @@ class D {
   // red
   set red(t) {
     const o = this.instance.toRgb();
-    this.instance = w({
+    this.instance = P({
       ...o,
       r: H(t),
       a: this.alphaValue / 100
@@ -119,7 +119,7 @@ class D {
   // green
   set green(t) {
     const o = this.instance.toRgb();
-    this.instance = w({
+    this.instance = P({
       ...o,
       g: H(t),
       a: this.alphaValue / 100
@@ -131,7 +131,7 @@ class D {
   // blue
   set blue(t) {
     const o = this.instance.toRgb();
-    this.instance = w({
+    this.instance = P({
       ...o,
       b: H(t),
       a: this.alphaValue / 100
@@ -168,7 +168,7 @@ const Ce = (e, t, o) => t < o ? e < t ? t : e > o ? o : e : e < o ? o : e > t ? 
   },
   emits: ["change"],
   setup(e, { emit: t }) {
-    const o = P(null), n = P(null);
+    const o = w(null), n = w(null);
     let a = e.color || new D();
     const r = Y({
       red: a.red,
@@ -239,13 +239,13 @@ function ut(e, t, o, n, a, r) {
     d("div", {
       ref: "barElement",
       class: "vc-alpha-slider__bar",
-      style: I(e.getBackgroundStyle),
+      style: K(e.getBackgroundStyle),
       onClick: t[0] || (t[0] = (...c) => e.onClickSider && e.onClickSider(...c))
     }, [
       d("div", {
         class: T(["vc-alpha-slider__bar-pointer", { "small-bar": e.size === "small" }]),
         ref: "cursorElement",
-        style: I(e.getCursorStyle)
+        style: K(e.getCursorStyle)
       }, t[1] || (t[1] = [
         d("div", { class: "vc-alpha-slider__bar-handle" }, null, -1)
       ]), 6)
@@ -336,7 +336,7 @@ const ke = /* @__PURE__ */ X(ct, [["render", ut], ["__scopeId", "data-v-bcb416bc
   emits: ["change"],
   setup(e, { emit: t }) {
     const o = (a) => a === "advance" || a === "transparent" ? {} : {
-      background: w(a).toRgbString()
+      background: P(a).toRgbString()
     }, n = (a) => {
       t("change", a);
     };
@@ -367,7 +367,7 @@ function ft(e, t, o, n, a, r) {
               transparent: h === "transparent"
             }
           ]),
-          style: I(e.computedBgStyle(h))
+          style: K(e.computedBgStyle(h))
         }, null, 6)
       ], 8, pt))), 128))
     ]))), 128))
@@ -391,7 +391,7 @@ const ze = /* @__PURE__ */ X(gt, [["render", ft], ["__scopeId", "data-v-40b33f10
       hueColor: a,
       saturation: ((l = e.color) == null ? void 0 : l.saturation) || 0,
       brightness: ((C = e.color) == null ? void 0 : C.brightness) || 0
-    }), c = P(0), s = P(0), h = P(), _ = P(), u = M(() => ({
+    }), c = w(0), s = w(0), h = w(), _ = w(), u = M(() => ({
       top: c.value + "px",
       left: s.value + "px"
     })), i = () => {
@@ -438,7 +438,7 @@ function Ct(e, t, o, n, a, r) {
   return p(), $("div", {
     ref: "boardElement",
     class: T(["vc-saturation", { "vc-saturation__chrome": e.round, "vc-saturation__hidden": e.hide }]),
-    style: I({ backgroundColor: e.state.hueColor }),
+    style: K({ backgroundColor: e.state.hueColor }),
     onClick: t[0] || (t[0] = (...c) => e.onClickBoard && e.onClickBoard(...c))
   }, [
     t[2] || (t[2] = d("div", { class: "vc-saturation__white" }, null, -1)),
@@ -446,7 +446,7 @@ function Ct(e, t, o, n, a, r) {
     d("div", {
       class: "vc-saturation__cursor",
       ref: "cursorElement",
-      style: I(e.getCursorStyle)
+      style: K(e.getCursorStyle)
     }, t[1] || (t[1] = [
       d("div", null, null, -1)
     ]), 4)
@@ -460,7 +460,7 @@ const $e = /* @__PURE__ */ X(vt, [["render", Ct], ["__scopeId", "data-v-dc8c7a9d
   },
   emits: ["change"],
   setup(e, { emit: t }) {
-    const o = P(null), n = P(null);
+    const o = w(null), n = w(null);
     let a = e.color || new D();
     const r = Y({
       hue: a.hue || 0
@@ -517,7 +517,7 @@ function yt(e, t, o, n, a, r) {
       d("div", {
         class: T(["vc-hue-slider__bar-pointer", { "small-bar": e.size === "small" }]),
         ref: "cursorElement",
-        style: I(e.getCursorStyle)
+        style: K(e.getCursorStyle)
       }, t[1] || (t[1] = [
         d("div", { class: "vc-hue-slider__bar-handle" }, null, -1)
       ]), 6)
@@ -532,7 +532,7 @@ const Se = /* @__PURE__ */ X(bt, [["render", yt], ["__scopeId", "data-v-f557cbeb
   },
   emits: ["change"],
   setup(e, { emit: t }) {
-    const o = P(null), n = P(null);
+    const o = w(null), n = w(null);
     let a = e.color || new D();
     const [r, c, s] = a.HSL, h = Y({
       hue: r,
@@ -555,19 +555,19 @@ const Se = /* @__PURE__ */ X(bt, [["render", yt], ["__scopeId", "data-v-f557cbeb
       { deep: !0 }
     );
     const _ = M(() => {
-      const g = w({
+      const g = P({
         h: h.hue,
         s: h.saturation,
         l: 0.8
-      }).toPercentageRgbString(), l = w({
+      }).toPercentageRgbString(), l = P({
         h: h.hue,
         s: h.saturation,
         l: 0.6
-      }).toPercentageRgbString(), C = w({
+      }).toPercentageRgbString(), C = P({
         h: h.hue,
         s: h.saturation,
         l: 0.4
-      }).toPercentageRgbString(), f = w({
+      }).toPercentageRgbString(), f = P({
         h: h.hue,
         s: h.saturation,
         l: 0.2
@@ -620,13 +620,13 @@ function _t(e, t, o, n, a, r) {
     d("div", {
       ref: "barElement",
       class: "vc-lightness-slider__bar",
-      style: I(e.getBackgroundStyle),
+      style: K(e.getBackgroundStyle),
       onClick: t[0] || (t[0] = (...c) => e.onClickSider && e.onClickSider(...c))
     }, [
       d("div", {
         class: T(["vc-lightness-slider__bar-pointer", { "small-bar": e.size === "small" }]),
         ref: "cursorElement",
-        style: I(e.getCursorStyle)
+        style: K(e.getCursorStyle)
       }, t[1] || (t[1] = [
         d("div", { class: "vc-lightness-slider__bar-handle" }, null, -1)
       ]), 6)
@@ -649,8 +649,8 @@ const We = /* @__PURE__ */ X(mt, [["render", _t], ["__scopeId", "data-v-9836acab
 const $t = {
   key: 0,
   class: "vc-colorPicker__record"
-}, St = { class: "color-list" }, Pt = ["onClick"];
-function wt(e, t, o, n, a, r) {
+}, St = { class: "color-list" }, wt = ["onClick"];
+function Pt(e, t, o, n, a, r) {
   return e.colors && e.colors.length > 0 ? (p(), $("div", $t, [
     d("div", St, [
       (p(!0), $(U, null, oe(e.colors, (c, s) => (p(), $("div", {
@@ -660,13 +660,13 @@ function wt(e, t, o, n, a, r) {
       }, [
         d("div", {
           class: "color-item__display",
-          style: I({ backgroundColor: c })
+          style: K({ backgroundColor: c })
         }, null, 4)
-      ], 10, Pt))), 128))
+      ], 10, wt))), 128))
     ])
   ])) : S("", !0);
 }
-const Pe = /* @__PURE__ */ X(kt, [["render", wt], ["__scopeId", "data-v-9369baf5"]]), Ht = O({
+const we = /* @__PURE__ */ X(kt, [["render", Pt], ["__scopeId", "data-v-9369baf5"]]), Ht = O({
   name: "Display",
   props: {
     color: v.instanceOf(D),
@@ -675,7 +675,7 @@ const Pe = /* @__PURE__ */ X(kt, [["render", wt], ["__scopeId", "data-v-9369baf5
   emits: ["update:color", "change"],
   setup(e, { emit: t }) {
     var i, y, k, g;
-    const o = P("hex"), n = Y({
+    const o = w("hex"), n = Y({
       color: e.color,
       hex: (i = e.color) == null ? void 0 : i.hex,
       alpha: ((y = e.color) == null ? void 0 : y.alpha) + "%",
@@ -694,11 +694,11 @@ const Pe = /* @__PURE__ */ X(kt, [["render", wt], ["__scopeId", "data-v-9369baf5
       if (l.target.value) {
         if (o.value === "hex") {
           const f = l.target.value.replace("#", "");
-          w(f).isValid() && n.color && (n.color.hex = f);
+          P(f).isValid() && n.color && (n.color.hex = f);
         } else if (C !== void 0 && n.rgba && n.color) {
           l.target.value < 0 && (l.target.value = 0), C === 3 && l.target.value > 1 && (l.target.value = 1), C < 3 && l.target.value > 255 && (l.target.value = 255), n.rgba[C] = Number(l.target.value);
           const [f, N, z, W] = n.rgba;
-          n.color.hex = w({ r: f, g: N, b: z }).toHex(), n.color.alpha = Math.floor(W * 100);
+          n.color.hex = P({ r: f, g: N, b: z }).toHex(), n.color.alpha = Math.floor(W * 100);
         }
         t("update:color", n.color), t("change", n.color);
       }
@@ -750,7 +750,7 @@ function Et(e, t, o, n, a, r) {
     (e.isSupported, p(), $("div", At, [
       d("div", {
         class: "color-cube",
-        style: I(e.getBgColorStyle)
+        style: K(e.getBgColorStyle)
       }, null, 4)
     ])),
     e.inputType === "hex" ? (p(), $("div", Rt, [
@@ -787,9 +787,9 @@ function Et(e, t, o, n, a, r) {
     })
   ]);
 }
-const we = /* @__PURE__ */ X(Ht, [["render", Et], ["__scopeId", "data-v-c2960dc8"]]), Tt = O({
+const Pe = /* @__PURE__ */ X(Ht, [["render", Et], ["__scopeId", "data-v-c2960dc8"]]), Tt = O({
   name: "FkColorPicker",
-  components: { Display: we, Alpha: ke, Palette: ze, Board: $e, Hue: Se, Lightness: We, History: Pe },
+  components: { Display: Pe, Alpha: ke, Palette: ze, Board: $e, Hue: Se, Lightness: We, History: we },
   props: {
     color: v.instanceOf(D),
     disableHistory: v.bool.def(!1),
@@ -806,13 +806,13 @@ const we = /* @__PURE__ */ X(Ht, [["render", Et], ["__scopeId", "data-v-c2960dc8
       color: o,
       hex: o.toHexString(),
       rgb: o.toRgbString()
-    }), a = P(!1), r = M(() => ({ background: n.rgb })), c = () => {
+    }), a = w(!1), r = M(() => ({ background: n.rgb })), c = () => {
       a.value = !1, t("advanceChange", !1);
     }, s = ye(me, [], {}), h = J(() => {
       if (e.disableHistory)
         return;
       const l = n.color.toRgbString();
-      if (s.value = s.value.filter((C) => !w.equals(C, l)), !s.value.includes(l)) {
+      if (s.value = s.value.filter((C) => !P.equals(C, l)), !s.value.includes(l)) {
         for (; s.value.length > _e; )
           s.value.pop();
         s.value.unshift(l);
@@ -829,7 +829,7 @@ const we = /* @__PURE__ */ X(Ht, [["render", Et], ["__scopeId", "data-v-c2960dc8
       n.color.lightness = l;
     }, g = (l) => {
       const f = l.target.value.replace("#", "");
-      w(f).isValid() && (n.color.hex = f);
+      P(f).isValid() && (n.color.hex = f);
     };
     return E(
       () => e.color,
@@ -912,7 +912,7 @@ function Wt(e, t, o, n, a, r) {
 }
 const Me = /* @__PURE__ */ X(Tt, [["render", Wt], ["__scopeId", "data-v-0e3f0858"]]), Gt = O({
   name: "ChromeColorPicker",
-  components: { Display: we, Alpha: ke, Board: $e, Hue: Se, History: Pe },
+  components: { Display: Pe, Alpha: ke, Board: $e, Hue: Se, History: we },
   props: {
     color: v.instanceOf(D),
     disableHistory: v.bool.def(!1),
@@ -929,7 +929,7 @@ const Me = /* @__PURE__ */ X(Tt, [["render", Wt], ["__scopeId", "data-v-0e3f0858
       if (e.disableHistory)
         return;
       const i = n.color.toRgbString();
-      if (r.value = r.value.filter((y) => !w.equals(y, i)), !r.value.includes(i)) {
+      if (r.value = r.value.filter((y) => !P.equals(y, i)), !r.value.includes(i)) {
         for (; r.value.length > _e; )
           r.value.pop();
         r.value.unshift(i);
@@ -1050,7 +1050,7 @@ const Jt = {
   setup(e, {
     emit: t
   }) {
-    const o = P(null), n = P(0);
+    const o = w(null), n = w(0);
     te(() => e.angle, (s) => {
       n.value = s;
     });
@@ -1107,13 +1107,13 @@ const eo = O({
   name: "GradientColorPicker",
   components: {
     Angle: Qt,
-    Display: we,
+    Display: Pe,
     Alpha: ke,
     Palette: ze,
     Board: $e,
     Hue: Se,
     Lightness: We,
-    History: Pe
+    History: we
   },
   props: {
     angle: v.number.def(0),
@@ -1160,7 +1160,7 @@ const eo = O({
       startMovePst: 0
     });
     let n = !1;
-    const a = Te(He), r = P(e.pickerType === "chrome"), c = P(), s = P(), h = P(), _ = P();
+    const a = Te(He), r = w(e.pickerType === "chrome"), c = w(), s = w(), h = w(), _ = w();
     te(
       () => [e.angle],
       (b) => {
@@ -1227,7 +1227,7 @@ const eo = O({
     }, A = (b) => {
       const R = b.target, G = parseInt(R.value.replace("°", ""));
       isNaN(G) || (o.angle = G % 360), t("update:angle", o.angle), t("angleChange", o.angle);
-    }, K = (b) => {
+    }, I = (b) => {
       o.angle = b, t("update:angle", o.angle), t("angleChange", o.angle);
     }, ne = (b) => {
       b === "advance" ? (r.value = !0, t("advanceChange", !0)) : (u.value.hex = b, t("advanceChange", !1)), q();
@@ -1251,7 +1251,7 @@ const eo = O({
       if (e.disableHistory)
         return;
       const b = u.value.toRgbString();
-      if (Z.value = Z.value.filter((R) => !w.equals(R, b)), !Z.value.includes(b)) {
+      if (Z.value = Z.value.filter((R) => !P.equals(R, b)), !Z.value.includes(b)) {
         for (; Z.value.length > _e; )
           Z.value.pop();
         Z.value.unshift(b);
@@ -1281,7 +1281,7 @@ const eo = O({
       onLightChange: fe,
       historyColors: Z,
       onBack: re,
-      onDegreeChange: K,
+      onDegreeChange: I,
       onDisplayChange: ve,
       onTypeChange: Ge,
       lang: a == null ? void 0 : a.lang,
@@ -1328,7 +1328,7 @@ function fo(e, t, o, n, a, r) {
         d("div", lo, [
           d("div", {
             class: "vc-background",
-            style: I(e.gradientBg),
+            style: K(e.gradientBg),
             onClick: t[2] || (t[2] = (...g) => e.handlePotBar && e.handlePotBar(...g))
           }, null, 4),
           d("div", so, [
@@ -1339,10 +1339,10 @@ function fo(e, t, o, n, a, r) {
               key: l,
               ref_for: !0,
               ref: "startGradientRef",
-              style: I({ left: `calc(${g.pst + "%"} - 8px)` }),
+              style: K({ left: `calc(${g.pst + "%"} - 8px)` }),
               onMousedown: (C) => e.sliderPotDown(l, C),
               onClick: (C) => e.clickGColorPot(l),
-              onKeyup: t[3] || (t[3] = Qe((...C) => e.handleKeyDown && e.handleKeyDown(...C), ["stop", "prevent"])),
+              onKeydown: t[3] || (t[3] = Qe((...C) => e.handleKeyDown && e.handleKeyDown(...C), ["stop", "prevent"])),
               tabindex: "0"
             }, t[6] || (t[6] = [
               d("span", { class: "vc-gradient__stop--inner" }, null, -1)
@@ -1408,7 +1408,7 @@ function fo(e, t, o, n, a, r) {
     }, null, 8, ["round", "colors", "onChange"]))
   ]);
 }
-const Ke = /* @__PURE__ */ X(eo, [["render", fo], ["__scopeId", "data-v-e0324175"]]), vo = O({
+const Ke = /* @__PURE__ */ X(eo, [["render", fo], ["__scopeId", "data-v-54d37a39"]]), vo = O({
   name: "WrapContainer",
   props: {
     theme: v.oneOf(["white", "black"]).def("white"),
@@ -1470,7 +1470,7 @@ function ko(e, t, o, n, a, r) {
           ], 2),
           d("div", {
             class: "vc-colorpicker--tabs__bg",
-            style: I({
+            style: K({
               width: "50%",
               left: `calc(${e.state.activeKey === "gradient" ? 50 : 0}%)`
             })
@@ -1488,16 +1488,16 @@ const $o = /* @__PURE__ */ X(vo, [["render", ko], ["__scopeId", "data-v-73cd7770
   gradient: "Gradient",
   linear: "linear",
   radial: "radial"
-}, Po = {
+}, wo = {
   start: "开始",
   end: "结束",
   pure: "纯色",
   gradient: "渐变",
   linear: "线性",
   radial: "径向"
-}, wo = {
+}, Po = {
   En: So,
-  "ZH-cn": Po
+  "ZH-cn": wo
 }, Ho = {
   isWidget: v.bool.def(!1),
   pickerType: v.oneOf(["fk", "chrome"]).def("fk"),
@@ -1555,7 +1555,7 @@ const $o = /* @__PURE__ */ X(vo, [["render", ko], ["__scopeId", "data-v-73cd7770
   ],
   setup(e, { emit: t }) {
     tt(He, {
-      lang: M(() => wo[e.lang || "ZH-cn"])
+      lang: M(() => Po[e.lang || "ZH-cn"])
     });
     const o = Y({
       pureColor: e.pureColor || "",
@@ -1569,10 +1569,10 @@ const $o = /* @__PURE__ */ X(vo, [["render", ko], ["__scopeId", "data-v-73cd7770
       gradientColor: e.gradientColor
     });
     !e.gradientColor && e.gradientData && e.gradientData.gradientColor ? a.gradientColor = e.gradientData.gradientColor || "linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 1) 100%)" : e.gradientColor || (a.gradientColor = "linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 1) 100%)");
-    const r = P(n), c = P(!1), s = P(null), h = P(null);
+    const r = w(n), c = w(!1), s = w(null), h = w(null);
     let _ = null;
     const u = M(() => ({
-      background: o.activeKey !== "gradient" ? w(o.pureColor).toRgbString() : a.gradientColor
+      background: o.activeKey !== "gradient" ? P(o.pureColor).toRgbString() : a.gradientColor
     })), i = M(() => o.activeKey === "gradient" ? Ke.name : e.pickerType === "fk" ? Me.name : Ie.name), y = (m) => {
       o.isAdvanceMode = m;
     }, k = M(() => {
@@ -1615,8 +1615,8 @@ const $o = /* @__PURE__ */ X(vo, [["render", ko], ["__scopeId", "data-v-73cd7770
     }, C = () => {
       var m, A;
       try {
-        const [K] = lt(a.gradientColor);
-        K && K.type.includes("gradient") && K.colorStops.length >= 2 && (K.colorStops.forEach((ne, x) => {
+        const [I] = lt(a.gradientColor);
+        I && I.type.includes("gradient") && I.colorStops.length >= 2 && (I.colorStops.forEach((ne, x) => {
           var re;
           const he = Number((re = ne.length) == null ? void 0 : re.value) || 0, [pe, fe, ve, q] = ne.value;
           a.colors[x] = new D({
@@ -1625,9 +1625,9 @@ const $o = /* @__PURE__ */ X(vo, [["render", ko], ["__scopeId", "data-v-73cd7770
             b: Number(ve),
             a: Number(q)
           }), a.colors[x].pst = he;
-        }), K.type === "linear-gradient" && ((m = K.orientation) == null ? void 0 : m.type) === "angular" && (a.angle = Number((A = K.orientation) == null ? void 0 : A.value) || 0), a.type = K.type.split("-")[0]);
-      } catch (K) {
-        console.log(`[Parse Color]: ${K}`);
+        }), I.type === "linear-gradient" && ((m = I.orientation) == null ? void 0 : m.type) === "angular" && (a.angle = Number((A = I.orientation) == null ? void 0 : A.value) || 0), a.type = I.type.split("-")[0], t("update:gradientData", I));
+      } catch (I) {
+        console.log(`[Parse Color]: ${I}`);
       }
     }, f = J(() => {
       const m = N();
@@ -1639,10 +1639,10 @@ const $o = /* @__PURE__ */ X(vo, [["render", ko], ["__scopeId", "data-v-73cd7770
         console.log(A);
       }
     }, e.debounce), N = () => {
-      const m = [], A = a.colors.map((K) => ({
+      const m = [], A = a.colors.map((I) => ({
         type: "rgba",
-        value: K.RGB.map((x) => x.toString()),
-        length: { value: K.pst + "", type: "%" }
+        value: I.RGB.map((x) => x.toString()),
+        length: { value: I.pst + "", type: "%" }
       }));
       return a.type === "linear" ? m.push({
         type: "linear-gradient",
@@ -1708,7 +1708,7 @@ const $o = /* @__PURE__ */ X(vo, [["render", ko], ["__scopeId", "data-v-73cd7770
     ), E(
       () => e.pureColor,
       (m) => {
-        w.equals(m, o.pureColor) || (o.pureColor = m, r.value = new D(m));
+        P.equals(m, o.pureColor) || (o.pureColor = m, r.value = new D(m));
       },
       { deep: !0 }
     ), {
@@ -1735,7 +1735,7 @@ function Ao(e, t, o, n, a, r) {
       "onUpdate:activeKey": t[0] || (t[0] = (s) => e.state.activeKey = s),
       "show-tab": e.useType === "both",
       onChange: e.onActiveKeyChange,
-      style: I({ zIndex: e.zIndex }),
+      style: K({ zIndex: e.zIndex }),
       theme: e.theme
     }, {
       default: Ae(() => [
@@ -1750,14 +1750,14 @@ function Ao(e, t, o, n, a, r) {
       }, [
         d("div", {
           class: "current-color",
-          style: I(e.getBgColorStyle),
+          style: K(e.getBgColorStyle),
           onClick: t[1] || (t[1] = (...s) => e.onShowPicker && e.onShowPicker(...s))
         }, null, 4)
       ], 2),
       (p(), L(ot, { to: e.pickerContainer }, [
         Ne(d("div", {
           ref: "pickerRef",
-          style: I({ zIndex: e.zIndex })
+          style: K({ zIndex: e.zIndex })
         }, [
           e.showPicker ? (p(), L(c, {
             key: 0,
@@ -1779,7 +1779,7 @@ function Ao(e, t, o, n, a, r) {
     ], 64))
   ], 64);
 }
-const ie = /* @__PURE__ */ X(Bo, [["render", Ao], ["__scopeId", "data-v-457e5e58"]]), Wo = {
+const ie = /* @__PURE__ */ X(Bo, [["render", Ao], ["__scopeId", "data-v-559b6b17"]]), Wo = {
   install: (e) => {
     e.component(ie.name, ie), e.component("Vue3" + ie.name, ie);
   }
