@@ -118,7 +118,6 @@ export default defineComponent({
     }, 300);
 
     const onInputChange = useDebounceFn((event, key?: number) => {
-      console.log(event.target.value);
       if (!event.target.value) {
         return;
       }

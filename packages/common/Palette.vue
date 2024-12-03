@@ -122,7 +122,6 @@ export default defineComponent({
     const onColorChange = (color: string) => {
       emit("change", color);
     };
-    console.log(props.defaultColors);
 
     return {
       palettes: props.defaultColors,

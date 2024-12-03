@@ -42,6 +42,8 @@
               :style="{ left: `calc(${item.pst + '%'} - 8px)` }"
               @mousedown="sliderPotDown(index, $event)"
               @click="clickGColorPot(index)"
+              @keyup.stop.prevent="handleKeyDown"
+              tabindex="0"
             >
               <span class="vc-gradient__stop--inner"></span>
             </div>
@@ -95,7 +97,18 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, PropType, reactive, ref, watch } from "vue";
+import {
+  computed,
+  defineComponent,
+  inject,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  PropType,
+  reactive,
+  ref,
+  watch,
+} from "vue";
 import propTypes from "vue-types";
 import {
   useDebounceFn,
@@ -308,8 +321,6 @@ export default defineComponent({
       }
     };
 
-    useEventListener(window, "keydown", handleKeyDown);
-
     const clickGColorPot = (index: Number) => {
       if (state.selectIndex === index) return;
       state.selectIndex = index;
@@ -349,6 +360,13 @@ export default defineComponent({
         state.colors.push(addPot);
         // 增加后默认选中
         state.selectIndex = state.colors.length - 1;
+        nextTick(() => {
+          const selectedPot = startGradientRef.value?.[state.selectIndex];
+          if (selectedPot) {
+            selectedPot.focus();
+          }
+        });
+
         emit("gradientChange", state.colors);
       }
     };
@@ -475,6 +493,7 @@ export default defineComponent({
       sliderPotDown,
       clickGColorPot,
       getGradientTypes,
+      handleKeyDown,
     };
   },
 });

@@ -67,7 +67,6 @@ export default defineComponent({
   },
   emits: ["update:color", "change", "advanceChange"],
   setup(props, { emit }) {
-    console.log(props.defaultColors);
     const colorInstance = props.color || new Color();
     const state = reactive({
       color: colorInstance,
