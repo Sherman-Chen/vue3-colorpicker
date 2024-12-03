@@ -108,6 +108,10 @@ const colorPickerProps = {
   theme: propTypes.oneOf(["white", "black"]).def("white"),
   gradientData: propTypes.object.def({}),
   gradientType: propTypes.oneOf(["both", "liner", "radial"]).def("both"),
+  defaultColors: {
+    type: Array as PropType<string[][]>,
+    default: undefined,
+  },
 };
 
 type ColorPickerProps = Partial<ExtractPropTypes<typeof colorPickerProps>>;
@@ -205,6 +209,7 @@ export default defineComponent({
         disableHistory: props.disableHistory,
         roundHistory: props.roundHistory,
         pickerType: props.pickerType,
+        defaultColors: props.defaultColors,
       };
 
       if (state.activeKey === "gradient") {

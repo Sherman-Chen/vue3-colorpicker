@@ -69,7 +69,11 @@
       @change="onBoardChange"
     />
     <Hue v-if="advancePanelShow" :color="currentColor" @change="onHueChange" />
-    <Palette v-if="!advancePanelShow" @change="onCompactChange" />
+    <Palette
+      v-if="!advancePanelShow"
+      @change="onCompactChange"
+      :default-colors="defaultColors"
+    />
     <Lightness
       v-if="!advancePanelShow"
       :color="currentColor"
@@ -91,7 +95,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, reactive, ref, watch } from "vue";
+import { computed, defineComponent, inject, PropType, reactive, ref, watch } from "vue";
 import propTypes from "vue-types";
 import {
   useDebounceFn,
@@ -158,6 +162,10 @@ export default defineComponent({
     colors: propTypes.array.def([]),
     colorStops: propTypes.array.def([]),
     gradientType: propTypes.oneOf(["both", "liner", "radial"]).def("both"),
+    defaultColors: {
+      type: Array as PropType<string[][]>,
+      default: undefined,
+    },
   },
   emits: [
     "update:startColor",
@@ -288,6 +296,19 @@ export default defineComponent({
       useEventListener(document.body, "mousemove", handleEleMouseMove);
       useEventListener(document.body, "mouseup", handleEleMouseUp);
     };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Delete" && state.colors.length > 2) {
+        state.colors.splice(state.selectIndex, 1);
+        state.selectIndex = Math.min(
+          state.selectIndex,
+          state.colors.length - 1
+        );
+        emit("gradientChange", state.colors);
+      }
+    };
+
+    useEventListener(window, "keydown", handleKeyDown);
 
     const clickGColorPot = (index: Number) => {
       if (state.selectIndex === index) return;

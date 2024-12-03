@@ -6,7 +6,11 @@
           <div class="back"></div>
         </span>
       </div>
-      <Palette v-if="!advancePanelShow" @change="onCompactChange" />
+      <Palette
+        v-if="!advancePanelShow"
+        @change="onCompactChange"
+        :default-colors="defaultColors"
+      />
       <Board
         v-if="advancePanelShow"
         :color="state.color"
@@ -35,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, PropType, reactive, ref } from "vue";
 import Alpha from "../common/Alpha.vue";
 import Palette from "../common/Palette.vue";
 import Board from "../common/Board.vue";
@@ -56,9 +60,14 @@ export default defineComponent({
     disableHistory: propTypes.bool.def(false),
     roundHistory: propTypes.bool.def(false),
     disableAlpha: propTypes.bool.def(false),
+    defaultColors: {
+      type: Array as PropType<string[][]>,
+      default: undefined,
+    },
   },
   emits: ["update:color", "change", "advanceChange"],
   setup(props, { emit }) {
+    console.log(props.defaultColors);
     const colorInstance = props.color || new Color();
     const state = reactive({
       color: colorInstance,

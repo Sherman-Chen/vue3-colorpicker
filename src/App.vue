@@ -1,12 +1,20 @@
 <template>
   <div :style="bg" class="bg">{{ color }}</div>
 
-  <div :style="bgline" class="bg"> {{ gradientColor }} </div>
+  <div :style="bgline" class="bg">{{ gradientColor }}</div>
 
   <div class="main">
     <div class="color-pickers">
-      <ColorPicker v-model:pureColor="color" picker-container="#app" />
-      <ColorPicker v-model:pureColor="color" shape="circle" pickerType="chrome" />
+      <ColorPicker
+        :defaultColors="defaultColors"
+        v-model:pureColor="color"
+        picker-container="#app"
+      />
+      <ColorPicker
+        v-model:pureColor="color"
+        shape="circle"
+        pickerType="chrome"
+      />
       <ColorPicker v-model:gradientColor="gradientColor" useType="gradient" />
 
       <div style="position: fixed; bottom: 10px; right: 10px">
@@ -20,10 +28,15 @@
         <h3>pickerType: fk</h3>
       </div>
       <div>
-        <ColorPicker v-model:pureColor="color" is-widget pickerType="chrome" :debounce="10" />
+        <ColorPicker
+          v-model:pureColor="color"
+          is-widget
+          pickerType="chrome"
+          :debounce="10"
+        />
         <h3>pickerType: chrome</h3>
       </div>
-      
+
       <div>
         <ColorPicker
           v-model:pureColor="color"
@@ -61,15 +74,14 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { Color } from "../packages";
 const color = ref("#00000055");
 const activeKey = ref("pure");
 const gradientColor = ref(
   // "linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 1) 100%)"
   "linear-gradient(90deg, rgba(255, 167, 39, 0.5) 0%, rgba(0, 0, 0, 1) 60%, rgba(230, 0, 0, 1) 80%,rgba(20, 50, 90, 1) 100% )"
 );
+const defaultColors = [["#ff0000"], ["#ff0000"]];
 
-const colors = new Color("#00000055");
 const doc = document.querySelector("#app");
 const bg = computed(() => {
   return { background: color.value };
